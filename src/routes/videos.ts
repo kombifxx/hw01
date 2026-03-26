@@ -6,11 +6,11 @@ import { validateCreateVideo, validateUpdateVideo } from '../validation'
 export const videosRouter = Router()
 
 videosRouter
-    .get('/videos', (_ , res: Response) => {
+    .get('/', (_ , res: Response) => {
         res.status(200).send(db.videos)
     })
 
-    .get('/videos/:id', (req: Request, res: Response) => {
+    .get('/:id', (req: Request, res: Response) => {
         const video = db.videos.find((d) => d.id === +req.params.id)
         if (!video) {
             return res.status(404).send({
@@ -20,7 +20,7 @@ videosRouter
         res.status(200).send(video)
     })
 
-    .post('/videos', (req: Request, res: Response) => {
+    .post('/', (req: Request, res: Response) => {
         const errors = validateCreateVideo(req.body)
         if (errors.length) return res.status(400).send({ errorsMessages: errors })
 
@@ -39,7 +39,7 @@ videosRouter
         res.status(201).send(newVideo)
     })
 
-    .put('/videos/:id', (req: Request, res: Response) => {
+    .put('/:id', (req: Request, res: Response) => {
         const video = db.videos.find(v => v.id === +req.params.id)
         if (!video) return res.sendStatus(404)
 
@@ -56,7 +56,7 @@ videosRouter
 
         res.sendStatus(204)
     })
-    .delete('/videos/:id', (req: Request, res: Response) => {
+    .delete('/:id', (req: Request, res: Response) => {
         const idx = db.videos.findIndex(v => v.id === +req.params.id)
         if (idx === -1) return res.status(404).send({ errorsMessages: [{ message: "Video not found", field: "id" }] })
         db.videos.splice(idx, 1)
