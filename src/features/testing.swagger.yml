@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: HW01 API
+  version: 1.0.0
+  description: API для домашки HW01
+
+tags:
+  - name: Testing
+    description: Эндпоинты для очистки базы данных
+
+paths:
+  /api/testing/all-data:
+    delete:
+      summary: Удалить все данные из базы
+      tags: [Testing]
+      responses:
+        204:
+          description: Все данные удалены успешно

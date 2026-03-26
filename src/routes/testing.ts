@@ -1,9 +1,9 @@
 import { Response, Router} from 'express'
 import { db } from '../db/in-memory.db'
-export const videosRouter = Router({})
+export const testingRouter = Router()
 
-videosRouter
- .delete('/testing/all-data', (_, res: Response ) => {
-     db.videos.splice(0, db.videos.length)
-     res.sendStatus(204)
- })
+testingRouter
+ .delete('/testing/all-data', (_req, res: Response) => {
+    db.videos = []
+    res.sendStatus(204)
+})

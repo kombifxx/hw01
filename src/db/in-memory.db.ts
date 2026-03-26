@@ -1,6 +1,15 @@
-import { Video } from "../types/interface";
+export type Video = {
+    id: number
+    title: string
+    author: string
+    canBeDownloaded: boolean
+    minAgeRestriction: number | null
+    createdAt: string
+    publicationDate: string
+    availableResolutions: string[]
+}
 
-export const db: { videos: Video[] } = {
-    videos: []  // теперь TS знает: это массив Video, просто пока пустой
-};
+export const db = {
+    videos: [] as Video[]
+}
 

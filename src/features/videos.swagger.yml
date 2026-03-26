@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Videos API
+  version: 1.0.0
+  description: API для работы с видео
+
+tags:
+  - name: Videos
+    description: Управление видео
+
+paths:
+  /api/videos:
+    get:
+      summary: Получить все видео
+      tags: [ Videos ]
+      responses:
+        200:
+          description: Список видео
+    post:
+      summary: Создать видео
+      tags: [ Videos ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideoInputModel'
+      responses:
+        201:
+          description: Видео успешно создано
+        400:
+          description: Ошибка валидации
+  /api/videos/{id}:
+    get:
+      summary: Получить видео по id
+      tags: [ Videos ]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Id видео
+      responses:
+        200:
+          description: Видео найдено
+        404:
+          description: Видео не найдено
+
+components:
+  schemas:
+    CreateVideoInputModel:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 40
+        author:
+          type: string
+          maxLength: 20
+        availableResolutions:
+          type: array
+          items:
+            type: string
+            enum: [P144, P240, P360, P480, P720, P1080, P1440, P2160]
